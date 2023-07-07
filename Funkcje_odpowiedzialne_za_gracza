@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+typedef struct {
+    int Position_On_X_Axis;
+    int Position_On_Y_Axis;
+
+} Player_Position;
+typedef union {
+
+
+
+}Power_Ups;
+
+typedef struct {
+    char Name[20];
+    int Order;
+    int Picked_Number;
+    Player_Position Position;
+    Power_Ups Number_Of_Power_Up;
+} Single_Player;
+typedef struct {
+
+    int **Board;
+
+}Game_Board;
+
+void Create_Board() {
+    printf("Give the size of the board Max 20X20 min 8X8");
+
+
+}
+
+Single_Player* Create_Player(int Number_Of_Player) {
+    Single_Player* z;
+    z = (Single_Player*)malloc(Number_Of_Player * sizeof(Single_Player));
+   
+    for (int i = 0; i < Number_Of_Player; i++) {
+        printf("Enter your name (up to 19 characters):\n");
+        fgets(z[i].Name, 20, stdin);
+        z[i].Name[strcspn(z[i].Name, "\n")] = 0;  // remove newline from string
+    }
+    return z;
+}
+
+void Randomize_First_Move(int number_of_players, Single_Player* b) {
+    int* Picked_Number = (int*)malloc(number_of_players * sizeof(int));
+    int number;
+    for (int i = 0; i < number_of_players; i++) {
+        /// reference to player ////
+        printf("Player:%s Give a number from 0 to 20\n", b[i].Name);
+        while (1) {
+            scanf("%d", &number);
+            if (number < 0 || number > 20) {
+                printf("Number out of range, please enter a number between 0 and 20.\n");
+                continue;
+            }
+            int already_chosen = 0;
+            for (int j = 0; j < i; j++) {
+                if (Picked_Number[j] == number) {
+                    already_chosen = 1;
+                    break;
+                }
+            }
+            if (!already_chosen) break;
+            else printf("This number has already been chosen, try another one.\n");
+        }
+        b[i].Picked_Number = *(Picked_Number + i) = number;
+    }
+    int g = rand() % 21;
+    printf("Number %d was drawn.\n",g);
+
+    // Bubble sort
+    for (int i = 0; i < number_of_players - 1; i++) {
+        for (int j = 0; j < number_of_players - 1 - i; j++) {
+            if (abs(b[j].Picked_Number - g) > abs(b[j + 1].Picked_Number - g)) {
+                Single_Player temp = b[j];
+                b[j] = b[j + 1];
+                b[j + 1] = temp;
+            }
+        }
+    }
+    printf("Order of players, closest to furthest from %d:\n", g);
+    for (int i = 0; i < number_of_players; i++) {
+        printf("%s\n", b[i].Name);
+    }
+
+    free(Picked_Number);
+}
+void Player_Position_On_Board(Single_Player* b, int Number_Of_Players, int choice) {
+    for (int i = 0; i < Number_Of_Players; i++) {
+        
+        
+            if (choice == 1) {
+                for (int i = 0; i < Number_Of_Players; i++{
+                    printf("........Randomizing......Player %s.....Position", b);
+                        b->Position.Position_On_X_Axis = rand()%;////////Do ustalnia rozwiazanie z Tablica
+                        b->Position.Position_On_Y_Axis = rand()%;////////Do ustalnia rozwiazanie z Tablica
+                }
+            }
+            else {
+                for (int i = 0; i < Number_Of_Players; i++{
+                printf("Player %s pick yours postion",b[i].Name);
+                printf ("Postion on x-Axis");
+                scnaf("%d", b[i].Position.Position_On_X_Axis );
+                printf("Postion on y-Axis");
+                scnaf("%d", b[i].Position.Position_On_Y_Axis);
+            }
+
+};
+void Single_Game() {
+    Single_Player* Players;
+    int Number_Of_Player;
+    printf("Enter number of players: ");
+    scanf("%d", &Number_Of_Player);
+    while ((getchar()) != '\n');  // clear input buffer
+    Players = Create_Player(Number_Of_Player);
+    Randomize_First_Move(Number_Of_Player, Players);
+    free(Players);
+}
+
+int main() {
+    srand(time(NULL));
+    Single_Game();
+    return 0;
+}
