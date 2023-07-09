@@ -1,2 +1,2 @@
-Tak castuje malloca oraz calloca, mimo tego że w C nie powinno się tego skoro i tak zwraca void*. Używam Visual Studio  a tam można pisać w jedynie w C++
-stąd muszę to robić :). Generalnie zostało dużo do zrobienia, jakiś zarys gry jest jednakże ze względu na brak doświadczenia ciężko to przelać na "papier".
+
+ Generalnie zostało dużo do zrobienia, jakiś zarys gry jest jednakże ze względu na brak doświadczenia ciężko to przelać na "papier".
