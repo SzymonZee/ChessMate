@@ -6,7 +6,7 @@ void Create_Board(Board* board, int Rows, int Columns) {
 
     board->Rows = Rows;
     board->Columns = Columns;
-    board->array = (int**)calloc(Rows, sizeof(int*));
+    board->array = calloc(Rows, sizeof(int*));
 
     if (board->array == NULL) {
         fprintf(stderr, "Out of memory\n");
@@ -15,7 +15,7 @@ void Create_Board(Board* board, int Rows, int Columns) {
 
     for (int i = 0; i < Rows; i++)
     {
-        board->array[i] = (int*)calloc(Columns, sizeof(int));
+        board->array[i] = calloc(Columns, sizeof(int));
         if (board->array[i] == NULL) {
             fprintf(stderr, "Out of memory\n");
             exit(1);
